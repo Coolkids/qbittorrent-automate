@@ -12,7 +12,7 @@ RUN apt-get update -y \
     && pip install --no-cache-dir --upgrade pip -i https://mirrors.aliyun.com/pypi/simple/ \
     && pip install pipx -i https://mirrors.aliyun.com/pypi/simple/ \
     && pipx install poetry \
-    && cd app \
+    && cd /app \
     && poetry install
 
 CMD ["poetry", "run", "python", "src/qibttorrent/main.py"]
