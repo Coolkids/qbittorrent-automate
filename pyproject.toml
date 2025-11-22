@@ -1,0 +1,19 @@
+[project]
+name = "qbittorrent-automate"
+version = "0.1.0"
+description = ""
+authors = [
+    {name = "s196774065",email = "s196774065@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "qbittorrent_api==2025.11.0",
+    "APScheduler==3.11.1"
+]
+[tool.poetry]
+package-mode = false
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
