@@ -4,7 +4,7 @@ WORKDIR /app
 
 ENV PATH="${PATH}:/root/.local/bin"
 
-ADD ./ /app/
+COPY ./ /app/
 
 RUN apt-get update -y \
     && apt-get upgrade -y \
@@ -15,4 +15,4 @@ RUN apt-get update -y \
     && cd /app \
     && poetry install
 
-CMD ["poetry", "run", "python", "src/qibttorrent-automate/main.py"]
+CMD ["poetry", "run", "python", "src/qbittorrent-automate/main.py"]
