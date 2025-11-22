@@ -5,7 +5,7 @@ on:
     branches:
       - master
     paths:
-      - version.py
+      - src/qbittorrent-automate/version.py
       - Dockerfile
       - .github/workflows/build.yml
       - pyproject.toml
@@ -22,7 +22,7 @@ jobs:
         name: Release version
         id: release_version
         run: |
-          app_version=$(cat version.py |sed -ne "s/APP_VERSION\s=\s'v\(.*\)'/\1/gp")
+          app_version=$(cat src/qbittorrent-automate/version.py |sed -ne "s/APP_VERSION\s=\s'v\(.*\)'/\1/gp")
           echo "app_version=$app_version" >> $GITHUB_ENV
 
       -
