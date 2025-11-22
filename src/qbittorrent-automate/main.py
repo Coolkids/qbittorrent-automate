@@ -18,7 +18,7 @@ def setup_logging():
     # 日志格式
     formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
 
-    # 从环境变量获取日志路径，默认为当前目录下的 qb_auto_cleaner.log
+    # 从环境变量获取日志路径，默认为当前目录下的 qb_automate.log
     log_path = os.getenv('LOG_PATH', 'qb_automate.log')
 
     # 确保日志目录存在
