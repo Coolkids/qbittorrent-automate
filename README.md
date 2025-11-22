@@ -25,4 +25,7 @@ INCLUDE_TAGS=
 
 # 调度器配置
 CHECK_INTERVAL=60  # 检查间隔（分钟）
+
+# 日志配置
+LOG_PATH=qb_automate.log  # 日志文件路径
 ```

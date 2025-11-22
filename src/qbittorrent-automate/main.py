@@ -2,20 +2,54 @@
 
 import os
 import logging
+from logging.handlers import RotatingFileHandler
 import traceback
 from qbittorrentapi import Client, LoginFailed
 from apscheduler.schedulers.blocking import BlockingScheduler
 from apscheduler.triggers.interval import IntervalTrigger
 
+
 # 配置日志
-logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - %(message)s',
-    handlers=[
-        logging.FileHandler("qb_automate.log"),
-        logging.StreamHandler()
-    ]
-)
+def setup_logging():
+    """配置日志系统，限制单个文件最大5MB，保留3个备份文件"""
+    logger = logging.getLogger()
+    logger.setLevel(logging.INFO)
+
+    # 日志格式
+    formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s')
+
+    # 从环境变量获取日志路径，默认为当前目录下的 qb_auto_cleaner.log
+    log_path = os.getenv('LOG_PATH', 'qb_automate.log')
+
+    # 确保日志目录存在
+    log_dir = os.path.dirname(log_path)
+    if log_dir and not os.path.exists(log_dir):
+        os.makedirs(log_dir, exist_ok=True)
+
+    # 文件处理器 - 限制文件大小为5MB，保留3个备份
+    file_handler = RotatingFileHandler(
+        log_path,
+        maxBytes=5 * 1024 * 1024,  # 5MB
+        backupCount=3,
+        encoding='utf-8'
+    )
+    file_handler.setFormatter(formatter)
+
+    # 控制台处理器
+    console_handler = logging.StreamHandler()
+    console_handler.setFormatter(formatter)
+
+    # 清除现有处理器并添加新处理器
+    logger.handlers.clear()
+    logger.addHandler(file_handler)
+    logger.addHandler(console_handler)
+
+    # 记录日志路径信息
+    logger.info(f"日志文件路径: {os.path.abspath(log_path)}")
+
+
+# 初始化日志配置
+setup_logging()
 logger = logging.getLogger(__name__)
 
 
