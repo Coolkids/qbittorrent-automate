@@ -15,4 +15,4 @@ RUN apt-get update -y \
     && cd /app \
     && poetry install
 
-CMD ["poetry", "run", "python", "src/qibttorrent/main.py"]
+CMD ["poetry", "run", "python", "src/qibttorrent-automate/main.py"]
