@@ -108,7 +108,7 @@ class QBittorrentAutoMate:
         progress = torrent['progress']
 
         # 检查是否满足删除条件
-        if progress >= 100 and (ratio >= self.ratio_limit or seeding_time >= self.seeding_time_limit):
+        if progress >= 1 and (ratio >= self.ratio_limit or seeding_time >= self.seeding_time_limit):
             logger.info(f"种子满足删除条件: {torrent['name']} - 分享率: {ratio:.2f}, 做种时间: {seeding_time:.1f}分钟")
             return True
 
