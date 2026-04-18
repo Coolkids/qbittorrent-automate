@@ -105,9 +105,10 @@ class QBittorrentAutoMate:
         # 获取种子数据
         ratio = torrent['ratio']
         seeding_time = torrent['seeding_time'] / 60  # 转换为分钟
+        progress = torrent['progress']
 
         # 检查是否满足删除条件
-        if ratio >= self.ratio_limit or seeding_time >= self.seeding_time_limit:
+        if progress >= 100 and (ratio >= self.ratio_limit or seeding_time >= self.seeding_time_limit):
             logger.info(f"种子满足删除条件: {torrent['name']} - 分享率: {ratio:.2f}, 做种时间: {seeding_time:.1f}分钟")
             return True
 
@@ -117,7 +118,7 @@ class QBittorrentAutoMate:
         """获取已完成的种子列表"""
         try:
             # 获取所有已经完成的种子
-            return self.qb.torrents_info(status_filter='completed')
+            return self.qb.torrents_info(status_filter='all')
         except Exception as e:
             logger.error(f"获取种子列表失败: {e}")
             return []
